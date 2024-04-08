@@ -18,6 +18,6 @@ Atualizado em 08/04/2024
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 1. Catar frutas no bosque      | Soneca ➕➖     |
+| 1. Qatar frutas no bosque      | Soneca ➕➖     |
 | 2. Arrumar as camas   | Soneca  ❌    |
 | 3. Consertar a cerca | Zangado  ➕➖ | 
