@@ -5,10 +5,10 @@ Atualizado em 08/04/2024
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 1. Alimentar as galinhas      | Dunga  ✔️     |
-| 2. Espanar os móveis   | Atchim ✔️       |
-| 3. Cortar lenha   | Zangado ✔️       |
-| 4. Pagar as contas   | Mestre ✔️       |
+| 1. Aprimorar diagramas      |  Davi, davi & Livia     |
+| 2. Desenvolvimento do código   | Pedro & Ian      |
+| 3. Documentação do projeto   | Ian       |
+| 4. Backlog   | Ian        |
 | 5. Planejamento da semana que vem   | Norbit ✔️       |
 | 6. Organizar o jantar   | Feliz ✔️       |
 | 7. Aguar as plantas   | Dengoso  ✔️      |
