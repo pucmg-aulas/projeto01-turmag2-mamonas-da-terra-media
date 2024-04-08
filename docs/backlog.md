@@ -1,5 +1,5 @@
-# Backlog do projeto XXX
-Atualizado em DD/MM/AAAA
+# Backlog do projeto Mamonas Da Terra
+Atualizado em 08/04/2024
 
 ## Tarefas terminadas
 
