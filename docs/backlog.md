@@ -9,7 +9,7 @@ Atualizado em DD/MM/AAAA
 | 2. Espanar os móveis   | Atchim ✔️       |
 | 3. Cortar lenha   | Zangado ✔️       |
 | 4. Pagar as contas   | Mestre ✔️       |
-| 5. Planejamento da semana que vem   | Mestre ✔️       |
+| 5. Planejamento da semana que vem   | Norbit ✔️       |
 | 6. Organizar o jantar   | Feliz ✔️       |
 | 7. Aguar as plantas   | Dengoso  ✔️      |
 ----
