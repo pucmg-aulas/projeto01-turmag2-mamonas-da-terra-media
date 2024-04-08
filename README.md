@@ -1,9 +1,9 @@
 # Nome do projeto
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+O objetivo do nosso software é o desenvolvimento de um sistema para gerenciamento de lista de espera em restaurantes.
 
 ## Alunos integrantes da equipe
 
-* David Augusto Dias Soares
+* Davi Augusto Dias Soares
 * Pedro Henrique Morais Marques
 * Ian Matsuhara Ferraz
 * Livia Bontempo Leite
