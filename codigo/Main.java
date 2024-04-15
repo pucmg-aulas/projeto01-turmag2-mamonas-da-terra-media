@@ -5,10 +5,11 @@ import java.time.LocalTime;
 public class Main {
   public static void main(String[] args) {
 
-    LocalTime lo1;// = LocalTime.of(14,30);
-    LocalTime lo2;// = LocalTime.of(17,30);
     ArrayList<RequisicaoDeMesa> a = new ArrayList<RequisicaoDeMesa>();
     ListaDeEspera le = new ListaDeEspera(a);
+
+    LocalTime lo1;// = LocalTime.of(14,30);
+    LocalTime lo2;// = LocalTime.of(17,30);
     RequisicaoDeMesa jorge = new RequisicaoDeMesa("Jorge", 8, lo1 = LocalTime.of(14, 30), lo2 = LocalTime.of(17, 30));
     lo1 = LocalTime.of(17, 0);
     lo2 = LocalTime.of(20, 10);
