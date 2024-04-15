@@ -8,34 +8,28 @@ import java.util.ArrayList;
 
 public class ListaDeEspera {
     
-    private ArrayList listaNomes;
-    private ArrayList listaMesas;
-    
-    
-    public ListaDeEspera( ArrayList nomes, ArrayList mesas){
-        this.listaNomes = nomes; 
-        this.listaMesas = mesas;
+    private ArrayList<RequisicaoDeMesa> listaRequisicao;
         
+    public ListaDeEspera( ArrayList listaRequisicao){
+        this.listaRequisicao = listaRequisicao;         
     }
     
-    public void adicionaNaLista(RequisiçãoDeMesa rm){
-        this.listaNomes.add(rm.getNomeCliente());
-        this.listaMesas.add(rm.getQuantiaPessoas());
+    public void adicionaNaLista(RequisicaoDeMesa requisicao){
+        this.listaRequisicao.add(requisicao);
     }
     
-    public void removeDaLista(RequisiçãoDeMesa rm){
-        for (int i=0; i<this.listaNomes.size(); i++) {
-            if (rm.getNomeCliente().equals(this.listaNomes.get(i))){
-                this.listaNomes.remove(i);
-                this.listaMesas.remove(i);
+    public void removeDaLista(RequisicaoDeMesa requisicao){
+        for (int i=0; i<this.listaRequisicao.size(); i++) {
+            if (requisicao.equals(this.listaRequisicao.get(i))){
+                this.listaRequisicao.remove(i);
             }
         }
     }
     
     public String imprimeLista(){
         String rtrn = "";
-        for (int i = 0; i < listaNomes.size(); i++) {
-            rtrn += "Cliente: "+listaNomes.get(i)+ ", "+ listaMesas.get(i)+"\n";
+        for (int i = 0; i < listaRequisicao.size(); i++) {
+            rtrn += "Cliente: "+listaRequisicao.get(i).getNomeCliente() +", "+listaRequisicao.get(i).getQuantiaPessoas() + "\n";
         }
         return rtrn;
     }
