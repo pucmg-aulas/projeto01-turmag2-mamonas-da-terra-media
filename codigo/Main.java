@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public class Main {
   public static void main(String[] args) {
 
-    ArrayList<RequisicaoDeMesa> a = new ArrayList<RequisicaoDeMesa>();
+    ArrayList<RequisicaoDeMesa> a = new ArrayList<>();
     ListaDeEspera le = new ListaDeEspera(a);
 
     LocalTime lo1;// = LocalTime.of(14,30);
