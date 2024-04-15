@@ -6,17 +6,17 @@ package restaurante;
 
 import java.time.LocalTime;
 
-public class RequisiçãoDeMesa {
+public class RequisicaoDeMesa {
     
     private String nomeCliente;
     private int quantiaPessoas;
-    private LocalTime dataEntrada;
-    private LocalTime dataSaida;
+    private LocalTime horaEntrada;
+    private LocalTime horaSaida;
     
     
-    public RequisiçãoDeMesa(String nomeCliente, int quantiaPessoas, LocalTime dataEntrada, LocalTime dataSaida){
+    public RequisicaoDeMesa(String nomeCliente, int quantiaPessoas, LocalTime horaEntrada, LocalTime horaSaida){
         this.nomeCliente = nomeCliente; this.quantiaPessoas = quantiaPessoas;
-        this.dataEntrada = dataEntrada; this.dataSaida = dataSaida;
+        this.horaEntrada = horaEntrada; this.horaSaida = horaSaida;
         
     }
     
