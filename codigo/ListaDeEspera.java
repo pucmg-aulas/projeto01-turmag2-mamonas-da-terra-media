@@ -19,11 +19,7 @@ public class ListaDeEspera {
     }
     
     public void removeDaLista(RequisicaoDeMesa requisicao){
-        for (int i=0; i<this.listaRequisicao.size(); i++) {
-            if (requisicao.equals(this.listaRequisicao.get(i))){
-                this.listaRequisicao.remove(i);
-            }
-        }
+        this.listaRequisicao.remove(requisicao);
     }
     
     public String imprimeLista(){
