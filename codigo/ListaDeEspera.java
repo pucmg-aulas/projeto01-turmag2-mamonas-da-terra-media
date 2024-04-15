@@ -4,7 +4,7 @@
  */
 package restaurante;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class ListaDeEspera {
     
