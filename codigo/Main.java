@@ -12,8 +12,13 @@ public class Main {
     le.adicionaNaLista(new RequisicaoDeMesa("Tadeu", 4, LocalTime.of(17, 0), LocalTime.of(20, 10)));
     le.adicionaNaLista(new RequisicaoDeMesa("Mateus", 6, LocalTime.of(6, 0), LocalTime.of(7, 56)));
     le.adicionaNaLista(new RequisicaoDeMesa("Joinha", 6, LocalTime.of(20, 15), LocalTime.of(22, 30)));
-  
 
+
+    System.out.println("antes de remover: " + le.imprimeLista());
+    le.removeDaListaPorNome("Mateus");
+    System.out.println("depois de remover: " + le.imprimeLista());
+
+  
     Mesa m1 = new Mesa(4, false);
     System.out.println(m1.getNumeroAssentos());
     System.out.println(m1.getEstaDisponivel());
