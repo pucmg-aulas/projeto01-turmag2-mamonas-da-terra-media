@@ -15,6 +15,9 @@ public class ListaDeEspera {
     }
     
     public void adicionaNaLista(RequisicaoDeMesa requisicao){
+        if (requisicao == null) {
+            throw new IllegalArgumentException("não pode ser vazio");
+        }
         this.listaRequisicao.add(requisicao);
     }
     
