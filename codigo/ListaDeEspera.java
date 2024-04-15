@@ -24,6 +24,11 @@ public class ListaDeEspera {
     public void removeDaLista(RequisicaoDeMesa requisicao){
         this.listaRequisicao.remove(requisicao);
     }
+
+    public void removeDaListaPorNome(String nomeCliente) {
+        
+    listaRequisicao.removeIf(requisicao -> requisicao.getNomeCliente().equals(nomeCliente));
+    }
     
     public String imprimeLista(){
         String rtrn = "";
