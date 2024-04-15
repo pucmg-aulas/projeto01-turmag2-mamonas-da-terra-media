@@ -5,8 +5,21 @@
 package restaurante;
 
 
-public class Mesas {
-    private static final int qtdMesas = 10;
-    private int[] mesas = new int[qtdMesas];
-    
+
+public class Mesa {
+  private int numeroAssentos;
+  private boolean estaDisponivel;
+
+  public void ocuparMesa() {
+    if (this.estaDisponivel == false) {
+      this.estaDisponivel = true;
+    }
+  }
+
+  public void desocuparMesa() {
+    if (this.estaDisponivel == true) {
+      this.estaDisponivel = false;
+    }
+  }
+
 }
