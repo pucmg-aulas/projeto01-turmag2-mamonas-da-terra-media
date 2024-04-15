@@ -5,7 +5,7 @@ Atualizado em 08/04/2024
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-|       |      |
+| Aprimorar diagramas      |  Davi, davi & Livia     |
 
 
 ----
@@ -15,9 +15,8 @@ Atualizado em 08/04/2024
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 1. Aprimorar diagramas      |  Davi, davi & Livia     |
-| 2. Desenvolvimento do código   | Pedro & Ian      |
-| 3. Documentação do projeto   | Ian       |
-| 4. Backlog   | Ian        |
+| 1. Desenvolvimento do código   | Pedro & Ian      |
+| 2. Documentação do projeto   | Ian       |
+| 3. Backlog   | Ian        |
 
 ----
