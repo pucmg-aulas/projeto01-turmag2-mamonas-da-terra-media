@@ -4,20 +4,27 @@
  */
 package restaurante;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class RequisiçãoDeMesa {
     
-    String nomeCliete;
-    int quantiaPessoas;
-    LocalDateTime dataEntrada;
-    LocalDateTime dataSaida;
+    private String nomeCliente;
+    private int quantiaPessoas;
+    private LocalTime dataEntrada;
+    private LocalTime dataSaida;
     
     
-    public RequisiçãoDeMesa(String nomeCliente, int quantiaPessoas, LocalDateTime dataEntrada, LocalDateTime dataSaida){
-        this.nomeCliete = nomeCliente; this.quantiaPessoas = quantiaPessoas;
+    public RequisiçãoDeMesa(String nomeCliente, int quantiaPessoas, LocalTime dataEntrada, LocalTime dataSaida){
+        this.nomeCliente = nomeCliente; this.quantiaPessoas = quantiaPessoas;
         this.dataEntrada = dataEntrada; this.dataSaida = dataSaida;
         
+    }
+    
+    public String getNomeCliente(){
+        return this.nomeCliente;
+    }
+    public int getQuantiaPessoas(){
+        return this.quantiaPessoas;
     }
     
     
