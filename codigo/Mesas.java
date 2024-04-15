@@ -7,8 +7,22 @@ package restaurante;
 
 
 public class Mesa {
+  
   private int numeroAssentos;
   private boolean estaDisponivel;
+
+  public Mesa(int numeroAssentos, boolean estaDisponivel){
+    this.numeroAssentos = numeroAssentos;
+    this.estaDisponivel = estaDisponivel;
+  }
+
+  public int getNumeroAssentos(){
+    return this.numeroAssentos;
+  }
+  public boolean getEstaDisponivel(){
+    return this.estaDisponivel;
+  }
+  
 
   public void ocuparMesa() {
     if (this.estaDisponivel == false) {
