@@ -20,16 +20,11 @@ public class Main {
 
   
     Mesa m1 = new Mesa(4, false);
-    System.out.println(m1.getNumeroAssentos());
-    System.out.println(m1.getEstaDisponivel());
+    System.out.println("Mesa 1 - Assentos: " + m1.getNumeroAssentos() + ", Disponível: " + (m1.isDisponivel()));
     Mesa m2 = new Mesa(6, true);
-    System.out.println(m2.getNumeroAssentos());
-    System.out.println(m2.getEstaDisponivel());
+    System.out.println("Mesa 2 - Assentos: " + m2.getNumeroAssentos() + ", Disponível: " + (m2.isDisponivel()));
     Mesa m3 = new Mesa(8, false);
-    System.out.println(m3.getNumeroAssentos());
-    System.out.println(m3.getEstaDisponivel());
+    System.out.println("Mesa 3 - Assentos: " + m3.getNumeroAssentos() + ", Disponível: " + (m3.isDisponivel()));
   }
-
-  
 
 }
