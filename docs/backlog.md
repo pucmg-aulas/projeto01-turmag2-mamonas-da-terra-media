@@ -6,6 +6,9 @@ Atualizado em 08/04/2024
 | Tarefa      | Responsável |
 | ----------- | ----------- |
 | Aprimorar diagramas      |  Davi, davi & Livia     |
+| Desenvolvimento do código   | Pedro & Ian      |
+| Documentação do projeto   | Ian       |
+| Backlog   | Ian        |
 
 
 ----
@@ -15,8 +18,6 @@ Atualizado em 08/04/2024
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 1. Desenvolvimento do código   | Pedro & Ian      |
-| 2. Documentação do projeto   | Ian       |
-| 3. Backlog   | Ian        |
+
 
 ----
