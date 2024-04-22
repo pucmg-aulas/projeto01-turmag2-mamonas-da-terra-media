@@ -9,9 +9,12 @@ import java.util.*;
 public class ListaDeEspera {
     
     private ArrayList<RequisicaoDeMesa> listaRequisicao;
+    private ArrayList<RequisicaoDeMesa> historico;
+
         
-    public ListaDeEspera( ArrayList listaRequisicao){
-        this.listaRequisicao = listaRequisicao;         
+    public ListaDeEspera(){
+        this.listaRequisicao = new ArrayList <> (); 
+        this.historico = new ArrayList <>();
     }
     
     public void adicionaNaLista(RequisicaoDeMesa requisicao){
@@ -19,10 +22,13 @@ public class ListaDeEspera {
             throw new IllegalArgumentException("não pode ser vazio");
         }
         this.listaRequisicao.add(requisicao);
+                this.historico.add(requisicao);
+
     }
     
     public void removeDaLista(RequisicaoDeMesa requisicao){
         this.listaRequisicao.remove(requisicao);
+        
     }
 
     public void removeDaListaPorNome(String nomeCliente) {
@@ -34,6 +40,13 @@ public class ListaDeEspera {
         String rtrn = "";
         for (int i = 0; i < listaRequisicao.size(); i++) {
             rtrn += "Cliente: "+listaRequisicao.get(i).getNomeCliente() +", "+listaRequisicao.get(i).getQuantiaPessoas() + "\n";
+        }
+        return rtrn;
+    }
+    public String imprimeHistorico(){
+        String rtrn = "";
+        for (int i = 0; i < historico.size(); i++) {
+            rtrn += "Cliente: "+historico.get(i).getNomeCliente()+", "+historico.get(i).getQuantiaPessoas() + "\n";
         }
         return rtrn;
     }

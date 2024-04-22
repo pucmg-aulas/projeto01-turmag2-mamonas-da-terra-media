@@ -15,9 +15,9 @@ public class RequisicaoDeMesa {
     private LocalTime horaSaida;
     
     
-    public RequisicaoDeMesa(String nomeCliente, int quantiaPessoas, LocalTime horaEntrada, LocalTime horaSaida){
+    public RequisicaoDeMesa(String nomeCliente, int quantiaPessoas, LocalTime horaEntrada){
         this.nomeCliente = nomeCliente; this.quantiaPessoas = quantiaPessoas;
-        this.horaEntrada = horaEntrada; this.horaSaida = horaSaida;
+        this.horaEntrada = horaEntrada;
         
     }
     
@@ -26,6 +26,9 @@ public class RequisicaoDeMesa {
     }
     public int getQuantiaPessoas(){
         return this.quantiaPessoas;
+    }
+    public void setHoraSaida(LocalTime horaSaida){
+        this.horaSaida = horaSaida; 
     }
     
     
