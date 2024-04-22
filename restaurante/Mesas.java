@@ -6,9 +6,9 @@ public class Mesas{
   private int numeroAssentos;
   private boolean estaDisponivel;
 
-  public Mesas(int numeroAssentos, boolean estaDisponivel) { // adiciona uma mesa recebendo um parametro de assentos por fora.
+  public Mesas(int numeroAssentos, boolean estaDisponivel) { 
     if (numeroAssentos < 1) {
-      throw new IllegalArgumentException("A mesa deve ter no mínimo um assento, se não, não é uma mesa");
+      throw new IllegalArgumentException("Mesa tem que ter no mínimo 1 assento");
     }
     this.numeroAssentos = numeroAssentos;
     this.estaDisponivel = estaDisponivel;

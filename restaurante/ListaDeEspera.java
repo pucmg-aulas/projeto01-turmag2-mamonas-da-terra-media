@@ -23,31 +23,48 @@ public class ListaDeEspera {
         }
         this.listaRequisicao.add(requisicao);
                 this.historico.add(requisicao);
-
     }
     
     public void removeDaLista(RequisicaoDeMesa requisicao){
         this.listaRequisicao.remove(requisicao);
-        
     }
 
     public void removeDaListaPorNome(String nomeCliente) {
-        
     listaRequisicao.removeIf(requisicao -> requisicao.getNomeCliente().equals(nomeCliente));
     }
     
     public String imprimeLista(){
-        String rtrn = "";
+        String string_carrier = "";
         for (int i = 0; i < listaRequisicao.size(); i++) {
-            rtrn += "Cliente: "+listaRequisicao.get(i).getNomeCliente() +", "+listaRequisicao.get(i).getQuantiaPessoas() + "\n";
+            string_carrier += "Cliente: "+listaRequisicao.get(i).getNomeCliente() +", "+listaRequisicao.get(i).getQuantiaPessoas() + "\n";
         }
-        return rtrn;
+        return string_carrier;
     }
     public String imprimeHistorico(){
-        String rtrn = "";
+        String string_carrier = "";
         for (int i = 0; i < historico.size(); i++) {
-            rtrn += "Cliente: "+historico.get(i).getNomeCliente()+", "+historico.get(i).getQuantiaPessoas() + "\n";
+            string_carrier += "Cliente: "+historico.get(i).getNomeCliente()+", "+historico.get(i).getQuantiaPessoas() + "\n";
         }
-        return rtrn;
+        return string_carrier;
     }
+
+
+
+    public String imprimeCliente(String nomeCliente) {
+        for (RequisicaoDeMesa requisicao : listaRequisicao) {
+            if (requisicao.getNomeCliente().equals(nomeCliente)) {
+                return "cliente: " + requisicao.getNomeCliente() + 
+                       ", número de assentos: " + requisicao.getQuantiaPessoas() +
+                       ", hora de entrada: " + requisicao.getHoraEntrada().toString();
+            }
+        }
+        return "cliente não tem na lista.";
+    }
+    
+
+    
+    
+
+
+
 }
