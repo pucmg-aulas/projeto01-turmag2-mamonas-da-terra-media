@@ -6,3 +6,5 @@
 ## Versão 2.0
 ![image](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/assets/65373363/a69613ce-68e0-4827-b7ec-a52b5596606e)
 
+## Versão Final
+![diagramafinal](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/assets/65373363/95a71065-3387-4cfd-a6a5-3afbe397caaa)
