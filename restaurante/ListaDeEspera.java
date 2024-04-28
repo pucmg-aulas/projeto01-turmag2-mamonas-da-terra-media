@@ -17,7 +17,7 @@ public class ListaDeEspera {
         this.historico = new ArrayList <>();
     }
     
-    public void adicionaNaLista(RequisicaoDeMesa requisicao){
+    public void adicionarNaLista(RequisicaoDeMesa requisicao){
         if (requisicao == null) {
             throw new IllegalArgumentException("não pode ser vazio");
         }
@@ -25,22 +25,22 @@ public class ListaDeEspera {
                 this.historico.add(requisicao);
     }
     
-    public void removeDaLista(RequisicaoDeMesa requisicao){
+    public void removerDaLista(RequisicaoDeMesa requisicao){
         this.listaRequisicao.remove(requisicao);
     }
 
-    public void removeDaListaPorNome(String nomeCliente) {
+    public void removerDaListaPorNome(String nomeCliente) {
     listaRequisicao.removeIf(requisicao -> requisicao.getNomeCliente().equals(nomeCliente));
     }
     
-    public String imprimeLista(){
+    public String imprimirLista(){
         String string_carrier = "";
         for (int i = 0; i < listaRequisicao.size(); i++) {
             string_carrier += "Cliente: "+listaRequisicao.get(i).getNomeCliente() +", "+listaRequisicao.get(i).getQuantiaPessoas() + "\n";
         }
         return string_carrier;
     }
-    public String imprimeHistorico(){
+    public String imprimirHistorico(){
         String string_carrier = "";
         for (int i = 0; i < historico.size(); i++) {
             string_carrier += "Cliente: "+historico.get(i).getNomeCliente()+", "+historico.get(i).getQuantiaPessoas() + "\n";
@@ -50,7 +50,7 @@ public class ListaDeEspera {
 
 
 
-    public String imprimeCliente(String nomeCliente) {
+    public String imprimirCliente(String nomeCliente) {
         for (RequisicaoDeMesa requisicao : listaRequisicao) {
             if (requisicao.getNomeCliente().equals(nomeCliente)) {
                 return "cliente: " + requisicao.getNomeCliente() + 
