@@ -26,21 +26,21 @@ public class Main {
                 int lugares = scanner.nextInt();
                 scanner.nextLine(); 
                 RequisicaoDeMesa novaRequisicao = new RequisicaoDeMesa(nome, lugares, LocalTime.now());
-                listaDeEspera.adicionaNaLista(novaRequisicao);
+                listaDeEspera.adicionarNaLista(novaRequisicao);
                 System.out.println("Cliente adicionado com sucesso!");
 
             } else if (opcao == 2) {
 
                 System.out.print("Digite o nome do cliente: ");
                 String nome = scanner.nextLine();
-                listaDeEspera.removeDaListaPorNome(nome);
+                listaDeEspera.removerDaListaPorNome(nome);
                 System.out.println("Cliente removido com sucesso!");
 
             } else if (opcao == 3) {
 
                 System.out.print("Digite o nome do cliente: ");
                 String nome = scanner.nextLine();
-                System.out.println(listaDeEspera.imprimeCliente(nome));
+                System.out.println(listaDeEspera.imprimirCliente(nome));
 
             } else if (opcao == 4) {
 
