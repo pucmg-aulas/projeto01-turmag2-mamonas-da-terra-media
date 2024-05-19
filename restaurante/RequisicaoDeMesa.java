@@ -1,6 +1,7 @@
 package restaurante;
 
 import java.time.*;
+import java.util.*;
 
 public class RequisicaoDeMesa {
     
@@ -8,13 +9,16 @@ public class RequisicaoDeMesa {
     private int quantiaPessoas;
     private LocalTime horaEntrada;
     private LocalTime horaSaida;
-    private Mesas mesaAtribuida;  
+    private Mesa mesaAtribuida;  
+    private ArrayList<Pedido> pedidos = new ArrayList();
+    private double conta;
 
-    public RequisicaoDeMesa(String nomeCliente, int quantiaPessoas, LocalTime horaEntrada, Mesas mesa) {
+    public RequisicaoDeMesa(String nomeCliente, int quantiaPessoas, LocalTime horaEntrada, Mesa mesa) {
         this.nomeCliente = nomeCliente;
         this.quantiaPessoas = quantiaPessoas;
         this.horaEntrada = horaEntrada;
         this.mesaAtribuida = mesa;
+        this.conta = 0;
     }
 
     public String getNomeCliente() {
@@ -37,11 +41,25 @@ public class RequisicaoDeMesa {
         this.horaSaida = horaSaida;
     }
 
-    public Mesas getMesaAtribuida() {
+    public Mesa getMesaAtribuida() {
         return this.mesaAtribuida;
     }
 
-    public void setMesaAtribuida(Mesas mesa) {
+    public void setMesaAtribuida(Mesa mesa) {
         this.mesaAtribuida = mesa;
+    }
+    
+    public void fazerPedido(){
+        Pedido pedido = new Pedido();
+        pedido.fazerPedido();
+        pedidos.add(pedido);
+         for(int i=0; i<pedido.getPedido().size();i++){
+            this.conta+= pedido.getValores(i);
+        }
+    }
+    
+    public double calculaConta(){
+       
+        return this.conta * 1.1;
     }
 }
