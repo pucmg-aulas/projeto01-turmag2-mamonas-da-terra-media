@@ -5,12 +5,14 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        Menu menu = new Menu();
+        ArrayList<RequisicaoDeMesa> requisicoes = new ArrayList(); 
         Scanner scanner = new Scanner(System.in);
         ListaDeEspera listaDeEspera = new ListaDeEspera();
-        ArrayList<Mesas> mesas = new ArrayList<Mesas>(); 
-        mesas.add(new Mesas(4, true));  
-        mesas.add(new Mesas(6, true));  
-        mesas.add(new Mesas(8, true)); 
+        ArrayList<Mesa> mesas = new ArrayList<Mesa>(); 
+        mesas.add(new Mesa(4, true));  
+        mesas.add(new Mesa(6, true));  
+        mesas.add(new Mesa(8, true)); 
 
 
         while (true) {
@@ -20,9 +22,13 @@ public class Main {
             System.out.println("3 - Buscar pessoa na fila de espera");
             System.out.println("4 - Mostrar toda a lista de espera");
             System.out.println("5 - Mostrar disponibilidade das mesas");
-            System.out.println("6 - Sair");
+            System.out.println("6 - Imprimir Menu");
+            System.out.println("7 - Fazer Pedido ");
+            System.out.println("8 - Pedir a conta ");
+            System.out.println("9 - Sair");
+           
 
-            System.out.print("Opção: ");
+            System.out.print("Opcao: ");
             int opcao = scanner.nextInt();
             scanner.nextLine(); 
 
@@ -34,11 +40,11 @@ public class Main {
                 int lugares = scanner.nextInt();
                 scanner.nextLine();
 
-                Mesas mesaDisponivel = mesas.stream().filter(Mesas::isDisponivel).findFirst().orElse(null);
+                Mesa mesaDisponivel = mesas.stream().filter(Mesa::isDisponivel).findFirst().orElse(null);
                 if (mesaDisponivel != null) {
                     mesaDisponivel.ocuparMesa();
-                    RequisicaoDeMesa novaRequisicao = new RequisicaoDeMesa(nome, lugares, LocalTime.now(), mesaDisponivel);
-                    listaDeEspera.adicionarNaLista(novaRequisicao);
+                    requisicoes.add(new RequisicaoDeMesa(nome, lugares, LocalTime.now(), mesaDisponivel));
+                    listaDeEspera.adicionarNaLista(requisicoes.get(requisicoes.size()-1));
                     System.out.println("Cliente adicionado com sucesso!");
                 } else {
                     System.out.println("Nenhuma mesa disponível no momento.");
@@ -66,16 +72,41 @@ public class Main {
 
                 System.out.println("\nDisponibilidade das Mesas:");
                 mesas.forEach(mesa -> System.out.println("Mesa " + mesa.getNumeroAssentos() + " lugares: " + (mesa.isDisponivel() ? "Disponível" : "Ocupada")));
-
-            } else if (opcao == 6) {
-
-                System.out.println("Encerrando...");
-                scanner.close();
-                break;
+            
+            }else if (opcao == 6) {          
+                System.out.println(menu.imprimirMenu());
                 
-            } else {
-                System.out.println("Opção inválida. Tente novamente.");
+            }else if (opcao == 7) {
+              
+               System.out.println("Escolha a Mesa: ");
+               requisicoes.forEach(requisicao -> System.out.println(" Mesa: " + requisicao.getNomeCliente()));
+               String nome = scanner.nextLine();
+               for(RequisicaoDeMesa rm : requisicoes){
+                   if (rm.getNomeCliente().equals(nome)){
+                       rm.fazerPedido();
+                   }
+               }
+
+            }else if (opcao == 8){
+               System.out.println("Escolha a Mesa: ");
+               requisicoes.forEach(requisicao -> System.out.println(requisicao+" Mesa: " + requisicao.getNomeCliente()));
+               String nome = scanner.nextLine();
+               for(RequisicaoDeMesa rm : requisicoes){
+                   if (rm.getNomeCliente().equals(nome)){
+                       System.out.println("R$: "+rm.calculaConta());
+                   }
+               }
+            }else if (opcao == 9) {
+                System.out.println("\nEncerrando programa.");
+                break;   
+            }else  {
+                
+                System.out.println("\nOpção inválida. Tente novamente.");
+                
             }
         }
+         
     }
 }
+
+
