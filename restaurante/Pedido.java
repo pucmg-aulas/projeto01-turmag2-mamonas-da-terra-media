@@ -1,5 +1,5 @@
-
 package restaurante;
+
 import java.util.*;
 
 public class Pedido{
@@ -93,7 +93,3 @@ public class Pedido{
         return itens;
     }
 }
-
-
-
-     

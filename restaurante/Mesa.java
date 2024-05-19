@@ -1,12 +1,11 @@
 package restaurante;
-import java.util.*;
 
-public class Mesas{
+public class Mesa {
 
   private int numeroAssentos;
   private boolean estaDisponivel;
 
-  public Mesas(int numeroAssentos, boolean estaDisponivel) { 
+  public Mesa(int numeroAssentos, boolean estaDisponivel) {
     if (numeroAssentos < 1) {
       throw new IllegalArgumentException("Mesa tem que ter no mínimo 1 assento");
     }
