@@ -6,14 +6,14 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
-        ArrayList<RequisicaoDeMesa> requisicoes = new ArrayList(); 
+        ArrayList<RequisicaoDeMesa> requisicoes = new ArrayList<>(); 
         Scanner scanner = new Scanner(System.in);
-        ListaDeEspera listaDeEspera = new ListaDeEspera();
         ArrayList<Mesa> mesas = new ArrayList<Mesa>(); 
         mesas.add(new Mesa(4, true));  
         mesas.add(new Mesa(6, true));  
         mesas.add(new Mesa(8, true)); 
 
+        ListaDeEspera listaDeEspera = new ListaDeEspera(mesas);
 
         while (true) {
             System.out.println("\nEscolha uma opção:");
@@ -26,7 +26,7 @@ public class Main {
             System.out.println("7 - Fazer Pedido ");
             System.out.println("8 - Pedir a conta ");
             System.out.println("9 - Sair");
-           
+
 
             System.out.print("Opcao: ");
             int opcao = scanner.nextInt();
@@ -40,11 +40,15 @@ public class Main {
                 int lugares = scanner.nextInt();
                 scanner.nextLine();
 
-                Mesa mesaDisponivel = mesas.stream().filter(Mesa::isDisponivel).findFirst().orElse(null);
+                Mesa mesaDisponivel = mesas.stream()
+                    .filter(mesa -> mesa.isDisponivel() && mesa.getNumeroAssentos() >= lugares)
+                    .sorted(Comparator.comparingInt(Mesa::getNumeroAssentos))
+                    .findFirst()
+                    .orElse(null);
+
                 if (mesaDisponivel != null) {
-                    mesaDisponivel.ocuparMesa();
-                    requisicoes.add(new RequisicaoDeMesa(nome, lugares, LocalTime.now(), mesaDisponivel));
-                    listaDeEspera.adicionarNaLista(requisicoes.get(requisicoes.size()-1));
+                    RequisicaoDeMesa requisicao = new RequisicaoDeMesa(nome, lugares, LocalTime.now(), mesaDisponivel);
+                    listaDeEspera.adicionarNaLista(requisicao);
                     System.out.println("Cliente adicionado com sucesso!");
                 } else {
                     System.out.println("Nenhuma mesa disponível no momento.");
@@ -72,41 +76,44 @@ public class Main {
 
                 System.out.println("\nDisponibilidade das Mesas:");
                 mesas.forEach(mesa -> System.out.println("Mesa " + mesa.getNumeroAssentos() + " lugares: " + (mesa.isDisponivel() ? "Disponível" : "Ocupada")));
-            
-            }else if (opcao == 6) {          
-                System.out.println(menu.imprimirMenu());
-                
-            }else if (opcao == 7) {
-              
-               System.out.println("Escolha a Mesa: ");
-               requisicoes.forEach(requisicao -> System.out.println(" Mesa: " + requisicao.getNomeCliente()));
-               String nome = scanner.nextLine();
-               for(RequisicaoDeMesa rm : requisicoes){
-                   if (rm.getNomeCliente().equals(nome)){
-                       rm.fazerPedido();
-                   }
-               }
 
-            }else if (opcao == 8){
-               System.out.println("Escolha a Mesa: ");
-               requisicoes.forEach(requisicao -> System.out.println(requisicao+" Mesa: " + requisicao.getNomeCliente()));
-               String nome = scanner.nextLine();
-               for(RequisicaoDeMesa rm : requisicoes){
-                   if (rm.getNomeCliente().equals(nome)){
-                       System.out.println("R$: "+rm.calculaConta());
-                   }
-               }
-            }else if (opcao == 9) {
+            } else if (opcao == 6) {
+                
+                System.out.println(menu.imprimirMenu());
+
+            } else if (opcao == 7) {
+
+                System.out.println("Escolha a Mesa: ");
+                requisicoes.forEach(requisicao -> System.out.println("Mesa: " + requisicao.getNomeCliente()));
+                String nome = scanner.nextLine();
+                for (RequisicaoDeMesa rm : requisicoes) {
+                    if (rm.getNomeCliente().equals(nome)) {
+                        rm.fazerPedido();
+                    }
+                }
+
+            } else if (opcao == 8) {
+
+                System.out.println("Escolha a Mesa: ");
+                requisicoes.forEach(requisicao -> System.out.println(requisicao + " Mesa: " + requisicao.getNomeCliente()));
+                String nome = scanner.nextLine();
+                for (RequisicaoDeMesa rm : requisicoes) {
+                    if (rm.getNomeCliente().equals(nome)) {
+                        System.out.println("R$: " + rm.calculaConta());
+                    }
+                }
+            } else if (opcao == 9) {
+
                 System.out.println("\nEncerrando programa.");
-                break;   
-            }else  {
-                
+
+                break;
+
+            } else {
+
                 System.out.println("\nOpção inválida. Tente novamente.");
-                
+
             }
         }
-         
+
     }
 }
-
-
