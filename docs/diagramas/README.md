@@ -13,4 +13,4 @@
 ![diagrama 4](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/assets/65373363/430774d6-a0f8-40b4-9165-ae4be282c7b7)
 
 ## Versão 5.0
-![diagrama 5]([docs/diagramas/Diagrama sem nome (1).png](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/blob/7fe98f9d3a6a7f42404d2a8cba35b37b792194e1/docs/diagramas/Diagrama%20sem%20nome%20(1).png) 
+![diagrama 5](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/blob/7fe98f9d3a6a7f42404d2a8cba35b37b792194e1/docs/diagramas/Diagrama%20sem%20nome%20(1).png) 
