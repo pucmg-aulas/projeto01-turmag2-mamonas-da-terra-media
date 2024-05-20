@@ -49,16 +49,17 @@ public class Main {
                 if (mesaDisponivel != null) {
                     RequisicaoDeMesa requisicao = new RequisicaoDeMesa(nome, lugares, LocalTime.now(), mesaDisponivel);
                     listaDeEspera.adicionarNaLista(requisicao);
+                    requisicoes.add(requisicao); 
                     System.out.println("Cliente adicionado com sucesso!");
                 } else {
                     System.out.println("Nenhuma mesa disponível no momento.");
                 }
 
             } else if (opcao == 2) {
-
                 System.out.print("\nDigite o nome do cliente a ser removido: ");
                 String nome = scanner.nextLine();
                 listaDeEspera.removerDaListaPorNome(nome);
+                requisicoes.removeIf(rm -> rm.getNomeCliente().equals(nome)); // Remove também da lista de requisicoes
                 System.out.println("Cliente removido com sucesso!");
 
             } else if (opcao == 3) {
@@ -78,7 +79,7 @@ public class Main {
                 mesas.forEach(mesa -> System.out.println("Mesa " + mesa.getNumeroAssentos() + " lugares: " + (mesa.isDisponivel() ? "Disponível" : "Ocupada")));
 
             } else if (opcao == 6) {
-                
+
                 System.out.println(menu.imprimirMenu());
 
             } else if (opcao == 7) {
@@ -105,15 +106,13 @@ public class Main {
             } else if (opcao == 9) {
 
                 System.out.println("\nEncerrando programa.");
-
+                
                 break;
 
             } else {
 
                 System.out.println("\nOpção inválida. Tente novamente.");
-
             }
         }
-
     }
 }
