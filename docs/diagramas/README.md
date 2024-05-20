@@ -11,3 +11,6 @@
 
 ## Versão 4.0
 ![diagrama 4](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/assets/65373363/430774d6-a0f8-40b4-9165-ae4be282c7b7)
+
+## Versão 5.0
+! [diagrama 5](docs/diagramas/Diagrama sem nome (1).png) 
