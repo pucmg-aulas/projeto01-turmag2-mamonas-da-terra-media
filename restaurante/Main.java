@@ -12,7 +12,6 @@ public class Main {
         mesas.add(new Mesa(4, true));  
         mesas.add(new Mesa(6, true));  
         mesas.add(new Mesa(8, true)); 
-
         ListaDeEspera listaDeEspera = new ListaDeEspera(mesas);
 
         while (true) {
@@ -56,10 +55,11 @@ public class Main {
                 }
 
             } else if (opcao == 2) {
+
                 System.out.print("\nDigite o nome do cliente a ser removido: ");
                 String nome = scanner.nextLine();
                 listaDeEspera.removerDaListaPorNome(nome);
-                requisicoes.removeIf(rm -> rm.getNomeCliente().equals(nome)); // Remove também da lista de requisicoes
+                requisicoes.removeIf(rm -> rm.getNomeCliente().equals(nome)); 
                 System.out.println("Cliente removido com sucesso!");
 
             } else if (opcao == 3) {
@@ -87,26 +87,56 @@ public class Main {
                 System.out.println("Escolha a Mesa: ");
                 requisicoes.forEach(requisicao -> System.out.println("Mesa: " + requisicao.getNomeCliente()));
                 String nome = scanner.nextLine();
-                for (RequisicaoDeMesa rm : requisicoes) {
-                    if (rm.getNomeCliente().equals(nome)) {
-                        rm.fazerPedido();
+                RequisicaoDeMesa requisicaoEncontrada = requisicoes.stream()
+                    .filter(rm -> rm.getNomeCliente().equals(nome))
+                    .findFirst()
+                    .orElse(null);
+                    
+                if (requisicaoEncontrada != null) {
+
+                    System.out.println("Menu:\n" + menu.imprimirMenu());
+                    System.out.print("Digite o nome do item para adicionar ao pedido: ");
+                    String itemNome = scanner.nextLine();
+                    ItemMenu item = menu.getItens().stream()
+                        .filter(i -> i.getNome().equalsIgnoreCase(itemNome))
+                        .findFirst()
+                        .orElse(null);
+
+                    if (item != null) {
+
+                        requisicaoEncontrada.getPedido().adicionarItem(item);
+                        System.out.println("Item adicionado ao pedido!");
+
+                    } else {
+
+                        System.out.println("Item não encontrado no menu! :(");
+
                     }
+                } else {
+                    System.out.println("Mesa não encontrada!");
                 }
 
             } else if (opcao == 8) {
 
                 System.out.println("Escolha a Mesa: ");
-                requisicoes.forEach(requisicao -> System.out.println(requisicao + " Mesa: " + requisicao.getNomeCliente()));
+                requisicoes.forEach(requisicao -> System.out.println("Mesa: " + requisicao.getNomeCliente()));
                 String nome = scanner.nextLine();
-                for (RequisicaoDeMesa rm : requisicoes) {
-                    if (rm.getNomeCliente().equals(nome)) {
-                        System.out.println("R$: " + rm.calculaConta());
-                    }
+                RequisicaoDeMesa requisicaoEncontrada = requisicoes.stream()
+                    .filter(rm -> rm.getNomeCliente().equals(nome))
+                    .findFirst()
+                    .orElse(null);
+                if (requisicaoEncontrada != null) {
+
+                    System.out.println("Total a pagar: R$ " + requisicaoEncontrada.calculaConta());
+
+                } else {
+
+                    System.out.println("Mesa não encontrada! :(");
                 }
             } else if (opcao == 9) {
 
                 System.out.println("\nEncerrando programa.");
-                
+
                 break;
 
             } else {

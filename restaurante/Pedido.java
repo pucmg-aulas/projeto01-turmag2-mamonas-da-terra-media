@@ -1,95 +1,61 @@
 package restaurante;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Pedido{
-    
-    ArrayList itens = new ArrayList();
-    ArrayList<Double> valores = new ArrayList<>();
-    
-    public Pedido(){}
-     
-    public void fazerPedido(){
-        
-        Menu cardapio = new Menu();
-        Scanner ler = new Scanner(System.in);
-        System.out.println(cardapio.imprimirMenu());
-        System.out.println("Aperte 0 para encerrar!");
-        System.out.println("Numeros do Pedido: ");
-        int x = ler.nextInt();
-        while(x != 0){
-            if(x == 1){
-                itens.add("Moqueca De Tilapia");
-                valores.add(cardapio.getMoqueca());
-                x = ler.nextInt();
-            }
-            if(x == 2){
-                itens.add("Falafel Assado");
-                valores.add(cardapio.getFalafel());
-                x = ler.nextInt();
-                
-            }
-            if(x == 3){
-                itens.add("Salada Primavera com Macarrao Konjac");
-                valores.add(cardapio.getSalada());
-                x = ler.nextInt();
-            }
-            if(x == 4){
-                itens.add("Escondidinho de Frango");
-                valores.add(cardapio.getEscondidinho());
-                x = ler.nextInt();
-            }
-            if(x == 5){
-                itens.add("Strogonoff");
-                valores.add(cardapio.getGostrognocoff());
-                x = ler.nextInt();
-            }
-            if(x == 6){
-                itens.add("Cacarola de Carne com Legumes");
-                valores.add(cardapio.getCacarola());
-                x = ler.nextInt();
-            }
-            if(x == 7){
-                itens.add("Agua");
-                valores.add(cardapio.getAgua());
-                x = ler.nextInt();
-                
-            }
-            if(x == 8){
-                itens.add("Suco");
-                valores.add(cardapio.getSuco());
-                x = ler.nextInt();
-            }
-            if(x == 9){
-                itens.add("Refrigerante");
-                valores.add(cardapio.getRefrigerante());
-                x = ler.nextInt();
-            }
-            if(x == 10){
-                itens.add("Cerveja");
-                valores.add(cardapio.getCerveja());
-                x = ler.nextInt();
-            }
-            if(x == 11){
-                itens.add("Taca De Vinho");
-                valores.add(cardapio.getTacaDeVinho());
-                x = ler.nextInt();
-            }       
+public class Pedido {
+    private List<ItemMenu> itens;
+    private double total;
+
+    public Pedido() {
+
+
+        this.itens = new ArrayList<>();
+        this.total = 0.0;
+    }
+
+    public void adicionarItem(ItemMenu item) {
+
+        itens.add(item);
+        total += item.getPreco();
+    }
+
+    public void removerItem(ItemMenu item) {
+
+
+        if (itens.remove(item)) {
+            total -= item.getPreco();
         }
     }
-    
-    public ArrayList getPedido(){
-        return this.itens;
+
+    public double calcularTotal() {
+
+        return total * 1.1; 
     }
-    
-    public double getValores(int i){
-        return this.valores.get(i);
-    }
-    public String imprimirPedido(){
-        String itens = "";
-        for(int i = 0; i<this.itens.size(); i++){
-            itens += this.itens.get(i) + ", ";
-        }
+
+    public List<ItemMenu> getItens() {
+
         return itens;
+    }
+
+    public void limparPedido() {
+
+        itens.clear();
+        total = 0.0;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder pedido_carrier = new StringBuilder();
+        for (ItemMenu item : itens) {
+
+            pedido_carrier.append(item.toString()).append("\n");
+
+        }
+        pedido_carrier.append("Total: R$ ").append(total).append("\n");
+        return pedido_carrier.toString();
+
+
     }
 }
