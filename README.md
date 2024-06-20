@@ -1,4 +1,4 @@
-# Nome do projeto
+# Restaurante Terra Média
 O objetivo do nosso software é o desenvolvimento de um sistema para gerenciamento de lista de espera em restaurantes.
 
 ## Alunos integrantes da equipe
