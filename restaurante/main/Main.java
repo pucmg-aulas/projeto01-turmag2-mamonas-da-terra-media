@@ -1,32 +1,48 @@
 package restaurante.main;
 
-import restaurante.model.*;
-import restaurante.view.*;
-import restaurante.controller.*;
-
+import java.io.IOException;
 import java.util.ArrayList;
+import restaurante.controller.*;
+import restaurante.model.*;
+import restaurante.util.DataSerializer;
+import restaurante.view.*;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Mesa> mesasDisponiveis = new ArrayList<>();
-        mesasDisponiveis.add(new Mesa(4, true));
-        mesasDisponiveis.add(new Mesa(6, true));
-        mesasDisponiveis.add(new Mesa(8, true));
+        ArrayList<Mesa> mesasDisponiveis;
+        Menu menu;
+        ListaDeEspera listaModel;
 
-        ListaDeEspera listaModel = new ListaDeEspera(mesasDisponiveis);
+        try {
+            mesasDisponiveis = (ArrayList<Mesa>) DataSerializer.deserialize("mesas.ser");
+            menu = (Menu) DataSerializer.deserialize("menu.ser");
+            listaModel = (ListaDeEspera) DataSerializer.deserialize("listaDeEspera.ser");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            mesasDisponiveis = new ArrayList<>();
+            mesasDisponiveis.add(new Mesa(4, true));
+            mesasDisponiveis.add(new Mesa(6, true));
+            mesasDisponiveis.add(new Mesa(8, true));
+
+            menu = new Menu();
+            listaModel = new ListaDeEspera(mesasDisponiveis);
+        }
+
         ListaDeEsperaView listaView = new ListaDeEsperaView();
-        ListaDeEsperaController listaController = new ListaDeEsperaController(listaModel, listaView);
+        ListaDeEsperaController listaController = new ListaDeEsperaController(listaView);
 
         Pedido pedidoModel = new Pedido();
         PedidoView pedidoView = new PedidoView();
         PedidoController pedidoController = new PedidoController(pedidoModel, pedidoView);
 
-        RequisicaoDeMesaController controller = new RequisicaoDeMesaController();
-        RequisicaoDeMesaView requisicaoDeMesaView = new RequisicaoDeMesaView(controller);
+        RequisicaoDeMesaController requisicaoDeMesaController = new RequisicaoDeMesaController();
+        RequisicaoDeMesaView requisicaoDeMesaView = new RequisicaoDeMesaView(requisicaoDeMesaController);
 
-        Mesa mesaModel = new Mesa(4, true);
         MesaView mesaView = new MesaView();
-        MesaController mesaController1 = new MesaController(mesaModel, mesaView);
+        MesaController mesaController = new MesaController(mesaView);
+
+        MenuView menuView = new MenuView();
+        MenuController menuController = new MenuController(menuView);
 
     }
 }

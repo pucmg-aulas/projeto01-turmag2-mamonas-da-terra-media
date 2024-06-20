@@ -1,8 +1,10 @@
 package restaurante.model;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class RequisicaoDeMesa {
+public class RequisicaoDeMesa implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String nomeCliente;
     private int quantiaPessoas;
