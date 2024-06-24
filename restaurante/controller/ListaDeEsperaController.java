@@ -1,47 +1,54 @@
-package restaurante.controller;
+package controller;
 
-import restaurante.model.ListaDeEspera;
-import restaurante.model.RequisicaoDeMesa;
-import restaurante.model.Mesa;
-import restaurante.view.ListaDeEsperaView;
+import view.ListaDeEsperaView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.AbstractListModel;
+import javax.swing.ListModel;
+import javax.swing.table.DefaultTableModel;
+import restaurante.ItemMenu;
+import restaurante.ListaDeEspera;
+import restaurante.Mesa;
+import restaurante.Pedido;
+import restaurante.RequisicaoDeMesa;
 
 public class ListaDeEsperaController {
+
     private ListaDeEspera model;
     private ListaDeEsperaView view;
 
-    public ListaDeEsperaController(ListaDeEspera model, ListaDeEsperaView view) {
-        this.model = model;
-        this.view = view;
+    public ListaDeEsperaController() {
+        this.model = new ListaDeEspera(new ArrayList<Mesa>());
+        this.view = new ListaDeEsperaView();
 
-        this.view.addAdicionarButtonListener(new AdicionarListener());
-        this.view.addRemoverButtonListener(new RemoverListener());
-        this.view.addImprimirListaButtonListener(new ImprimirListaListener());
+        carregaTabela();
+        
+        this.view.setVisible(true);
+
     }
-
-    class AdicionarListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            String nomeCliente = view.getNomeCliente();
-            int quantiaPessoas = view.getQuantiaPessoas();
-            RequisicaoDeMesa requisicao = new RequisicaoDeMesa(nomeCliente, quantiaPessoas, LocalTime.now(), new Mesa(4, true));
-            model.adicionarNaLista(requisicao);
+    
+    public void carregaTabela(){
+        
+        ArrayList<Mesa> mesas = new ArrayList<Mesa>(); 
+        mesas.add(new Mesa(4, true));  
+        mesas.add(new Mesa(6, true));  
+        mesas.add(new Mesa(8, true));   
+        ListaDeEspera le = new ListaDeEspera(mesas);
+        Object colunas[] = {"Nome", "Cadeiras"};
+        DefaultTableModel tm = new DefaultTableModel(colunas, 0);
+        tm.setNumRows(0);
+        Iterator<RequisicaoDeMesa> listaDeEspera = le.getListaRequisicao().iterator();
+        while (listaDeEspera.hasNext()) {
+        RequisicaoDeMesa rm = listaDeEspera.next();
+        String item = rm.getNomeCliente()+ " - " + rm.getQuantiaPessoas();
+        String linha[] = item.split("%");
+        tm.addRow(new Object[]{linha[0], linha[1]});
         }
-    }
-
-    class RemoverListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            String nomeCliente = view.getNomeCliente();
-            model.removerDaListaPorNome(nomeCliente);
-        }
-    }
-
-    class ImprimirListaListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            String lista = model.imprimirLista();
-            view.setListaText(lista);
-        }
+        view.getListaDeEspera().setModel((ListModel<String>) tm);
     }
 }
