@@ -1,0 +1,29 @@
+ordem de comandos:
+
+
+incializar dataInitializer:
+
+
+javac -d bin *.java controller/*.java model/*.java view/*.java
+
+
+javac -d bin DataInitializer.java -----> não necessário se já foi executado o primeiro.
+
+
+java -cp bin restaurante.DataInitializer
+
+
+java -cp bin restaurante.Main
+
+
+////////////////////////////////////////////////////////////////
+
+
+
+Verificar dados:
+
+
+javac -d bin *.java controller/*.java model/*.java view/*.java VerificarDados.java
+
+
+java -cp bin VerificarDados

@@ -1,9 +1,11 @@
 package restaurante;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class ListaDeEspera {
-
+public class ListaDeEspera implements Serializable {
+    private static final long serialVersionUID = 1L;
     private ArrayList<RequisicaoDeMesa> listaRequisicao;
     private ArrayList<RequisicaoDeMesa> historico;
     private ArrayList<Mesa> mesasDisponiveis;
@@ -13,7 +15,6 @@ public class ListaDeEspera {
         this.historico = new ArrayList<>();
         this.mesasDisponiveis = mesasDisponiveis;
     }
-
 
     public void adicionarNaLista(RequisicaoDeMesa requisicao) {
         if (requisicao == null) {
@@ -30,13 +31,10 @@ public class ListaDeEspera {
         }
     }
 
-    
     public void removerDaLista(RequisicaoDeMesa requisicao) {
         this.listaRequisicao.remove(requisicao);
         requisicao.getMesaAtribuida().desocuparMesa();
     }
-
-
 
     public void removerDaListaPorNome(String nomeCliente) {
         Iterator<RequisicaoDeMesa> it = listaRequisicao.iterator();
@@ -48,7 +46,7 @@ public class ListaDeEspera {
             }
         }
     }
-    
+
     public String imprimirLista() {
         StringBuilder sb = new StringBuilder();
         for (RequisicaoDeMesa requisicao : listaRequisicao) {
@@ -81,8 +79,6 @@ public class ListaDeEspera {
         }
         return "Cliente não encontrado na lista.";
     }
-
-    
 
     private Mesa encontrarMesa(int quantiaPessoas) {
         Mesa mesaExata = null;
