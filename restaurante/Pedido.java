@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import restaurante.exception.ItemDoPedidoException;
+import restaurante.exception.PedidoException;
+
 public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<ItemMenu> itens;
@@ -14,15 +17,25 @@ public class Pedido implements Serializable {
         this.total = 0.0;
     }
 
-    public void adicionarItem(ItemMenu item) {
+    public void adicionarItem(ItemMenu item) throws PedidoException {
+        if (item == null) {
+            throw new PedidoException("Item de menu nulo.");
+        }
+
         itens.add(item);
         total += item.getPreco();
     }
 
-    public void removerItem(ItemMenu item) {
-        if (itens.remove(item)) {
-            total -= item.getPreco();
+    public void removerItem(ItemMenu item) throws PedidoException {
+        if (item == null) {
+            throw new PedidoException("Item de menu nulo.");
         }
+
+        if (!itens.remove(item)) {
+            throw new ItemDoPedidoException("Item não encontrado no pedido.");
+        }
+
+        total -= item.getPreco();
     }
 
     public double calcularTotal() {

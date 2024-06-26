@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import restaurante.exception.ClienteNaoEncontradoException;
+import restaurante.exception.ListaDeEsperaException;
+
 public class ListaDeEspera implements Serializable {
     private static final long serialVersionUID = 1L;
     private ArrayList<RequisicaoDeMesa> listaRequisicao;
@@ -17,8 +20,8 @@ public class ListaDeEspera implements Serializable {
     }
 
     public void adicionarNaLista(RequisicaoDeMesa requisicao) {
-        if (requisicao == null) {
-            throw new IllegalArgumentException("Requisição não pode ser vazia");
+        if (requisicao == null || requisicao.getNomeCliente().isEmpty()) {
+            throw new ListaDeEsperaException("Requisição não pode ser vazia ou sem nome de cliente.");
         }
         Mesa mesaAtribuida = encontrarMesa(requisicao.getQuantiaPessoas());
         if (mesaAtribuida != null) {
@@ -77,7 +80,7 @@ public class ListaDeEspera implements Serializable {
                        ", Mesa: " + requisicao.getMesaAtribuida().getNumeroAssentos() + " lugares";
             }
         }
-        return "Cliente não encontrado na lista.";
+        throw new ClienteNaoEncontradoException(nomeCliente);
     }
 
     private Mesa encontrarMesa(int quantiaPessoas) {
