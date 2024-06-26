@@ -18,9 +18,17 @@ public class DataInitializer {
         mesas.add(new Mesa(6, true));
         mesas.add(new Mesa(8, true));
 
-        menu.adicionarItem("Hamburguer", 10.0);
-        menu.adicionarItem("Batata Frita", 5.0);
-        menu.adicionarItem("Refrigerante", 3.0);
+        menu.adicionarItem("Moqueca de Tilapia", 2000.0);
+        menu.adicionarItem("Falafel Assado", 1500.0);
+        menu.adicionarItem("Salada Primavera com Macarrão Konjac", 8000.0);
+        menu.adicionarItem("Escondidinho de Frango", 3000.0);
+        menu.adicionarItem("Strogonoff", 3500.0);
+        menu.adicionarItem("Caçarola de carne com legumes", 4000.0);
+        menu.adicionarItem("Agua", 100.0);
+        menu.adicionarItem("Suco", 500.0);
+        menu.adicionarItem("Refrigerante", 300.0);
+        menu.adicionarItem("Cerveja", 1000.0);
+        menu.adicionarItem("Taca de Vinho", 15000.0);
 
         RequisicaoDeMesa req1 = new RequisicaoDeMesa("Cliente1", 4, LocalTime.now(), mesas.get(0));
         RequisicaoDeMesa req2 = new RequisicaoDeMesa("Cliente2", 2, LocalTime.now(), mesas.get(1));
