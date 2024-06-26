@@ -16,5 +16,5 @@
 ![diagrama 5](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/blob/7fe98f9d3a6a7f42404d2a8cba35b37b792194e1/docs/diagramas/Diagrama%20sem%20nome%20(1).png) 
 
 ## Versão Final
-![diagrama FINAL]([https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/blob/7fe98f9d3a6a7f42404d2a8cba35b37b792194e1/docs/diagramas/DiagramadeClasses.png](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/blob/master/docs/diagramas/Diagrama%20de%20Classes.png)) 
+![diagrama FINAL](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/blob/master/docs/diagramas/Diagrama%20de%20Classes.png)
 ![diagrama MVC](https://github.com/pucmg-aulas/projeto01-turmag2-mamonas-da-terra-media/blob/7fe98f9d3a6a7f42404d2a8cba35b37b792194e1/docs/diagramas/UML_MVC.png) 
