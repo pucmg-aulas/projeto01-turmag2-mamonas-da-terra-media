@@ -92,6 +92,6 @@ public class ClientesController {
     }
     
     public void voltar(){
-        this.view.dispose;
+        this.view.dispose();
     }
 }
