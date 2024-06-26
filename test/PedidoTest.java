@@ -2,52 +2,73 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import java.lang.reflect.Method;
-import java.util.Scanner;
-
 import restaurante.Pedido;
+import restaurante.ItemMenu;
 
-class PedidoTest {
+import java.util.List;
+
+public class PedidoTest {
 
     @Test
-    void registraPedidosConsecutivosTest() {
+    public void testAdicionarItem() {
         Pedido pedido = new Pedido();
+        ItemMenu item = new ItemMenu("Pasta", 20.0);
 
-        int[] pedidos = {6, 8, 7, 5, 0};
-        for (int x : pedidos) {
-            if (x != 0) {
-                switch (x) {
-                    case 6:
-                        pedido.getPedido().add("Cacarola de Carne com Legumes");
-                        break;
-                    case 8:
-                        pedido.getPedido().add("Suco");
-                        break;
-                    case 7:
-                        pedido.getPedido().add("Agua");
-                        break;
-                    case 5:
-                        pedido.getPedido().add("Strogonoff");
-                        break;
-                    default:
-                        break;
-                }
-            } else {
-                break;
-            }
-        }
-
-        String pedidoReal = pedido.imprimirPedido();
-        String pedidoEsperado = "Cacarola de Carne com Legumes, Suco, Agua, Strogonoff, ";
-        assertEquals(pedidoEsperado, pedidoReal, "Pedido não foi registrado corretamente");
+        pedido.adicionarItem(item);
+        List<ItemMenu> itens = pedido.getItens();
+        
+        assertEquals(1, itens.size());
+        assertTrue(itens.contains(item));
+        assertEquals(20.0, pedido.calcularTotal(), 0.001);
     }
 
     @Test
-    void registraNenhumPedidoTest() {
+    public void testRemoverItem() {
         Pedido pedido = new Pedido();
-        String pedidoReal = pedido.imprimirPedido();
-        String pedidoEsperado = "";
-        assertEquals(pedidoEsperado, pedidoReal, "Não deveria haver nenhum pedido registrado");
+        ItemMenu item = new ItemMenu("Pasta", 20.0);
+        pedido.adicionarItem(item);
+
+        pedido.removerItem(item);
+        List<ItemMenu> itens = pedido.getItens();
+        
+        assertEquals(0, itens.size());
+        assertFalse(itens.contains(item));
+        assertEquals(0.0, pedido.calcularTotal(), 0.001);
     }
 
+    @Test
+    public void testCalcularTotal() {
+        Pedido pedido = new Pedido();
+        ItemMenu item1 = new ItemMenu("Pasta", 20.0);
+        ItemMenu item2 = new ItemMenu("Salad", 10.0);
+
+        pedido.adicionarItem(item1);
+        pedido.adicionarItem(item2);
+        
+        double totalEsperado = (20.0 + 10.0) * 1.1;
+        assertEquals(totalEsperado, pedido.calcularTotal(), 0.001);
+    }
+
+    @Test
+    public void testLimparPedido() {
+        Pedido pedido = new Pedido();
+        ItemMenu item = new ItemMenu("Pasta", 20.0);
+        pedido.adicionarItem(item);
+
+        pedido.limparPedido();
+        List<ItemMenu> itens = pedido.getItens();
+        
+        assertEquals(0, itens.size());
+        assertEquals(0.0, pedido.calcularTotal(), 0.001);
+    }
+
+    @Test
+    public void testToString() {
+        Pedido pedido = new Pedido();
+        ItemMenu item = new ItemMenu("Pasta", 20.0);
+        pedido.adicionarItem(item);
+        
+        String expected = "Pasta - R$ 20.0\nTotal: R$ 20.0\n";
+        assertEquals(expected, pedido.toString());
+    }
 }

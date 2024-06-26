@@ -1,35 +1,91 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import restaurante.ListaDeEspera;
-import restaurante.RequisicaoDeMesa;
 import restaurante.Mesa;
+import restaurante.RequisicaoDeMesa;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-class ListaDeEsperaTest {
+public class ListaDeEsperaTest {
+    private ListaDeEspera listaDeEspera;
+    private ArrayList<Mesa> mesasDisponiveis;
 
-	@Test
-    void adicionaVazioListaDeEsperaTest() {
-        ArrayList<Mesa> mesasDisponiveis = new ArrayList<>();
-        mesasDisponiveis.add(new Mesa(4, true));
-        ListaDeEspera listaTest = new ListaDeEspera(mesasDisponiveis);
-        assertThrows(IllegalArgumentException.class, () -> {
-            listaTest.adicionarNaLista(null);
-        });
+    @BeforeEach
+    public void setUp() {
+        mesasDisponiveis = new ArrayList<>();
+        mesasDisponiveis.add(new Mesa(4));
+        mesasDisponiveis.add(new Mesa(2));
+        listaDeEspera = new ListaDeEspera(mesasDisponiveis);
     }
 
     @Test
-    void adicionaClienteNaListaDeEsperaTest() {
-        Mesa mesa = new Mesa(4, true);
-        ListaDeEspera listaTest = new ListaDeEspera(new ArrayList<>());
-        RequisicaoDeMesa requisicao = new RequisicaoDeMesa("João", 4, LocalTime.of(12, 30), mesa);
-        listaTest.adicionarNaLista(requisicao);
-        String listaEsperada = "Cliente: João, Lugares: 4, Mesa: 4 lugares\n";
-        assertEquals(listaEsperada, listaTest.imprimirLista(), "Cliente não foi adicionado corretamente à lista de espera");
+    public void testAdicionarNaLista() {
+        RequisicaoDeMesa requisicao = new RequisicaoDeMesa("Ana", 2, LocalTime.of(20, 0), null);
+        listaDeEspera.adicionarNaLista(requisicao);
+        assertEquals(1, listaDeEspera.imprimirLista().split("\n").length);
+        assertTrue(requisicao.getMesaAtribuida().isOcupada());
     }
 
+    @Test
+    public void testAdicionarNaListaSemMesaDisponivel() {
+        mesasDisponiveis.get(0).ocuparMesa();
+        mesasDisponiveis.get(1).ocuparMesa();
+        RequisicaoDeMesa requisicao = new RequisicaoDeMesa("Ana", 2, LocalTime.of(20, 0), null);
+        listaDeEspera.adicionarNaLista(requisicao);
+        assertEquals(0, listaDeEspera.imprimirLista().split("\n").length);
+    }
+
+    @Test
+    public void testRemoverDaLista() {
+        RequisicaoDeMesa requisicao = new RequisicaoDeMesa("Ana", 2, LocalTime.of(20, 0), null);
+        listaDeEspera.adicionarNaLista(requisicao);
+        listaDeEspera.removerDaLista(requisicao);
+        assertEquals(0, listaDeEspera.imprimirLista().split("\n").length);
+        assertFalse(requisicao.getMesaAtribuida().isOcupada());
+    }
+
+    @Test
+    public void testRemoverDaListaPorNome() {
+        RequisicaoDeMesa requisicao = new RequisicaoDeMesa("Ana", 2, LocalTime.of(20, 0), null);
+        listaDeEspera.adicionarNaLista(requisicao);
+        listaDeEspera.removerDaListaPorNome("Ana");
+        assertEquals(0, listaDeEspera.imprimirLista().split("\n").length);
+        assertFalse(requisicao.getMesaAtribuida().isOcupada());
+    }
+
+    @Test
+    public void testImprimirLista() {
+        RequisicaoDeMesa requisicao1 = new RequisicaoDeMesa("Ana", 2, LocalTime.of(20, 0), null);
+        RequisicaoDeMesa requisicao2 = new RequisicaoDeMesa("Pedro", 4, LocalTime.of(21, 0), null);
+        listaDeEspera.adicionarNaLista(requisicao1);
+        listaDeEspera.adicionarNaLista(requisicao2);
+        String lista = listaDeEspera.imprimirLista();
+        assertTrue(lista.contains("Ana"));
+        assertTrue(lista.contains("Pedro"));
+    }
+
+    @Test
+    public void testImprimirHistorico() {
+        RequisicaoDeMesa requisicao1 = new RequisicaoDeMesa("Ana", 2, LocalTime.of(20, 0), null);
+        RequisicaoDeMesa requisicao2 = new RequisicaoDeMesa("Pedro", 4, LocalTime.of(21, 0), null);
+        listaDeEspera.adicionarNaLista(requisicao1);
+        listaDeEspera.adicionarNaLista(requisicao2);
+        listaDeEspera.removerDaLista(requisicao1);
+        String historico = listaDeEspera.imprimirHistorico();
+        assertTrue(historico.contains("Ana"));
+        assertTrue(historico.contains("Pedro"));
+    }
+
+    @Test
+    public void testImprimirCliente() {
+        RequisicaoDeMesa requisicao = new RequisicaoDeMesa("Ana", 2, LocalTime.of(20, 0), null);
+        listaDeEspera.adicionarNaLista(requisicao);
+        String infoCliente = listaDeEspera.imprimirCliente("Ana");
+        assertTrue(infoCliente.contains("Ana"));
+        assertTrue(infoCliente.contains("2"));
+    }
 }
