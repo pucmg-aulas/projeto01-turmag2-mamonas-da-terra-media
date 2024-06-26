@@ -13,8 +13,9 @@ import java.util.Comparator;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
-import restaurante.Mesa;
+import restaurante.*;
 import restaurante.RequisicaoDeMesa;
+import restaurante.RequisicoesDeMesa;
 import view.ClientesView;
 
 /**
@@ -23,41 +24,36 @@ import view.ClientesView;
  */
 public class ClientesController {
 
-    private ArrayList<RequisicaoDeMesa> model;
-    private ArrayList<Mesa> mesas;
+    private RequisicoesDeMesa model;
+    private Mesas mesas;
     private ClientesView view;
 
-    public ClientesController() {
+    public ClientesController(RequisicoesDeMesa rm, ListaDeEspera lista, Mesas mesas) {
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("requisicao.ser"))) {
-            this.model = (ArrayList<RequisicaoDeMesa>) ois.readObject();
-        } catch (IOException | ClassNotFoundException f) {
-            f.printStackTrace();
-        }
-
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("mesas.ser"))) {
-            mesas = (ArrayList<Mesa>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            mesas = new ArrayList<>();
-        }
+        this.model = rm;
+        this.mesas = mesas;   
         this.view = new ClientesView();
 
+        carregaClientes();
         this.view.getBtnAdicionar().addActionListener((e) -> {
-            adicionaCliente();
+            adicionaCliente(lista);
         });
         this.view.getBtnRemover().addActionListener((e) -> {
             removeCliente();
         });
-        
+
+        this.view.getBtnVoltar().addActionListener((e) -> {
+            voltar();
+        });
         this.view.setVisible(true);
 
+        
     }
 
-    private void adicionaCliente() {
+    private void adicionaCliente(ListaDeEspera lista) {
         String nomeCliente = view.getNomeCliente().getText();
         int numeroAscentos = Integer.valueOf(this.view.getNumeroAscentos().getText());
-        Mesa mesaDisponivel = mesas.stream()
+        Mesa mesaDisponivel = mesas.getMesas().stream()
                 .filter(mesa -> mesa.isDisponivel() && mesa.getNumeroAssentos() >= numeroAscentos)
                 .sorted(Comparator.comparingInt(Mesa::getNumeroAssentos))
                 .findFirst()
@@ -65,32 +61,37 @@ public class ClientesController {
 
         if (mesaDisponivel != null) {
             RequisicaoDeMesa requisicao = new RequisicaoDeMesa(nomeCliente, numeroAscentos, LocalTime.now(), mesaDisponivel);
-            model.add(requisicao);
+            model.getRequisicoes().add(requisicao);
             JLabel lm = new JLabel();
-            lm.setText("Cliente Adicionado!");  
+            lm.setText("Cliente Adicionado!");
             view.setStatus(lm);
             carregaClientes();
         } else {
-            new ListaDeEsperaController();
+            new ListaDeEsperaController(lista);
         }
     }
     
-    private void removeCliente(){
+
+    public void removeCliente() {
         String nomeCliente = view.getNomeCliente().getText();
-        RequisicaoDeMesa cliente = (RequisicaoDeMesa) model.stream()
+        RequisicaoDeMesa cliente = (RequisicaoDeMesa) model.getRequisicoes().stream()
                 .filter(c -> c.getNomeCliente().equals(nomeCliente));
-            model.remove(cliente);
-            carregaClientes();
+        model.getRequisicoes().remove(cliente);
+        carregaClientes();
+    }
+
+    public void carregaClientes() {
+        DefaultListModel lm = new DefaultListModel();
+        Iterator<RequisicaoDeMesa> clientes = model.getRequisicoes().iterator();
+        while (clientes.hasNext()) {
+            RequisicaoDeMesa rm = clientes.next();
+            String item = rm.getNomeCliente() + " - " + rm.getQuantiaPessoas();
+            lm.addElement(item);
+        }
+        view.getListaClientes().setModel(lm);
     }
     
-    private void carregaClientes(){
-        DefaultListModel lm = new DefaultListModel();
-            Iterator<RequisicaoDeMesa> clientes = model.iterator();
-            while (clientes.hasNext()) {
-                RequisicaoDeMesa rm = clientes.next();
-                String item = rm.getNomeCliente() + " - " + rm.getQuantiaPessoas();
-                lm.addElement(item);
-            }
-            view.getListaClientes().setModel(lm);
+    public void voltar(){
+        this.view.dispose;
     }
 }
