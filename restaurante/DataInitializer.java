@@ -15,8 +15,18 @@ public class DataInitializer {
 
         
         mesas.add(new Mesa(4, true));
+        mesas.add(new Mesa(4, true));
+        mesas.add(new Mesa(4, true));
+        mesas.add(new Mesa(4, true));
+    
         mesas.add(new Mesa(6, true));
+        mesas.add(new Mesa(6, true));
+        mesas.add(new Mesa(6, true));
+        mesas.add(new Mesa(6, true));
+        
         mesas.add(new Mesa(8, true));
+        mesas.add(new Mesa(8, true));
+             
 
         menu.adicionarItem("Moqueca de Tilapia", 2000.0);
         menu.adicionarItem("Falafel Assado", 1500.0);
